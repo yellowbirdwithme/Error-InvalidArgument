@@ -1,0 +1,79 @@
+global step 5400 learning rate 0.4950 step-time 3.79 perplexity 33.90
+  eval: bucket 0 perplexity 495.24
+  eval: bucket 1 perplexity 609.11
+  eval: bucket 2 perplexity 524.64
+  eval: bucket 3 perplexity 606.95
+Traceback (most recent call last):
+  File "C:\Python35 64\lib\site-packages\tensorflow\python\client\session.py", line 1021, in _do_call
+    return fn(*args)
+  File "C:\Python35 64\lib\site-packages\tensorflow\python\client\session.py", line 1003, in _run_fn
+    status, run_metadata)
+  File "C:\Python35 64\lib\contextlib.py", line 66, in __exit__
+    next(self.gen)
+  File "C:\Python35 64\lib\site-packages\tensorflow\python\framework\errors_impl.py", line 469, in raise_exception_on_not_ok_status
+    pywrap_tensorflow.TF_GetCode(status))
+tensorflow.python.framework.errors_impl.InvalidArgumentError: indices[25] = 30000 is not in [0, 30000)
+         [[Node: model_with_buckets/embedding_attention_seq2seq_3/RNN/EmbeddingWrapper_17/embedding_lookup = Gather[Tindices=DT_INT32, Tparams=DT_FLOAT, _class=
+["loc:@embedding_attention_seq2seq/RNN/EmbeddingWrapper/embedding/read"], validate_indices=true, _device="/job:localhost/replica:0/task:0/cpu:0"](embedding_atte
+ntion_seq2seq/RNN/EmbeddingWrapper/embedding/read, model_with_buckets/embedding_attention_seq2seq_3/RNN/EmbeddingWrapper_17/Reshape)]]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "execute.py", line 352, in <module>
+    train()
+  File "execute.py", line 180, in train
+    target_weights, bucket_id, False)
+  File "C:\Users\Администратор\Downloads\tensorflow_chatbot-master (1)\tensorflow_chatbot-master\seq2seq_model.py", line 230, in step
+    outputs = session.run(output_feed, input_feed)
+  File "C:\Python35 64\lib\site-packages\tensorflow\python\client\session.py", line 766, in run
+    run_metadata_ptr)
+  File "C:\Python35 64\lib\site-packages\tensorflow\python\client\session.py", line 964, in _run
+    feed_dict_string, options, run_metadata)
+  File "C:\Python35 64\lib\site-packages\tensorflow\python\client\session.py", line 1014, in _do_run
+    target_list, options, run_metadata)
+  File "C:\Python35 64\lib\site-packages\tensorflow\python\client\session.py", line 1034, in _do_call
+    raise type(e)(node_def, op, message)
+tensorflow.python.framework.errors_impl.InvalidArgumentError: indices[25] = 30000 is not in [0, 30000)
+         [[Node: model_with_buckets/embedding_attention_seq2seq_3/RNN/EmbeddingWrapper_17/embedding_lookup = Gather[Tindices=DT_INT32, Tparams=DT_FLOAT, _class=
+["loc:@embedding_attention_seq2seq/RNN/EmbeddingWrapper/embedding/read"], validate_indices=true, _device="/job:localhost/replica:0/task:0/cpu:0"](embedding_atte
+ntion_seq2seq/RNN/EmbeddingWrapper/embedding/read, model_with_buckets/embedding_attention_seq2seq_3/RNN/EmbeddingWrapper_17/Reshape)]]
+
+Caused by op 'model_with_buckets/embedding_attention_seq2seq_3/RNN/EmbeddingWrapper_17/embedding_lookup', defined at:
+  File "execute.py", line 352, in <module>
+    train()
+  File "execute.py", line 148, in train
+    model = create_model(sess, False)
+  File "execute.py", line 109, in create_model
+    gConfig['learning_rate_decay_factor'], forward_only=forward_only)
+  File "C:\Users\Администратор\Downloads\tensorflow_chatbot-master (1)\tensorflow_chatbot-master\seq2seq_model.py", line 158, in __init__
+    softmax_loss_function=softmax_loss_function)
+  File "C:\Python35 64\lib\site-packages\tensorflow\python\ops\seq2seq.py", line 1121, in model_with_buckets
+    decoder_inputs[:bucket[1]])
+  File "C:\Users\Администратор\Downloads\tensorflow_chatbot-master (1)\tensorflow_chatbot-master\seq2seq_model.py", line 157, in <lambda>
+    lambda x, y: seq2seq_f(x, y, False),
+  File "C:\Users\Администратор\Downloads\tensorflow_chatbot-master (1)\tensorflow_chatbot-master\seq2seq_model.py", line 121, in seq2seq_f
+    feed_previous=do_decode)
+  File "C:\Python35 64\lib\site-packages\tensorflow\python\ops\seq2seq.py", line 817, in embedding_attention_seq2seq
+    encoder_cell, encoder_inputs, dtype=dtype)
+  File "C:\Python35 64\lib\site-packages\tensorflow\python\ops\rnn.py", line 226, in rnn
+    (output, state) = call_cell()
+  File "C:\Python35 64\lib\site-packages\tensorflow\python\ops\rnn.py", line 213, in <lambda>
+    call_cell = lambda: cell(input_, state)
+  File "C:\Python35 64\lib\site-packages\tensorflow\python\ops\rnn_cell.py", line 755, in __call__
+    embedding, array_ops.reshape(inputs, [-1]))
+  File "C:\Python35 64\lib\site-packages\tensorflow\python\ops\embedding_ops.py", line 110, in embedding_lookup
+    validate_indices=validate_indices)
+  File "C:\Python35 64\lib\site-packages\tensorflow\python\ops\gen_array_ops.py", line 1293, in gather
+    validate_indices=validate_indices, name=name)
+  File "C:\Python35 64\lib\site-packages\tensorflow\python\framework\op_def_library.py", line 759, in apply_op
+    op_def=op_def)
+  File "C:\Python35 64\lib\site-packages\tensorflow\python\framework\ops.py", line 2240, in create_op
+    original_op=self._default_original_op, op_def=op_def)
+  File "C:\Python35 64\lib\site-packages\tensorflow\python\framework\ops.py", line 1128, in __init__
+    self._traceback = _extract_stack()
+
+InvalidArgumentError (see above for traceback): indices[25] = 30000 is not in [0, 30000)
+         [[Node: model_with_buckets/embedding_attention_seq2seq_3/RNN/EmbeddingWrapper_17/embedding_lookup = Gather[Tindices=DT_INT32, Tparams=DT_FLOAT, _class=
+["loc:@embedding_attention_seq2seq/RNN/EmbeddingWrapper/embedding/read"], validate_indices=true, _device="/job:localhost/replica:0/task:0/cpu:0"](embedding_atte
+ntion_seq2seq/RNN/EmbeddingWrapper/embedding/read, model_with_buckets/embedding_attention_seq2seq_3/RNN/EmbeddingWrapper_17/Reshape)]]
